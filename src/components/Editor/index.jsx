@@ -1,10 +1,24 @@
 import Input from '../Input';
 import './style.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const Editor = ({ sections,information }) => {
-  const [activeSectionKey, setActiveSectionKey] = useState(
-    Object.keys(sections)[0]);
+const Editor = ({ sections, information }) => {
+  const [activeSectionKey, setActiveSectionKey] = useState(Object.keys(sections)[0]);
+
+  const [activeInfo, setActiveInfo] = useState(
+    information[sections[Object.keys(sections)[0]]]
+  );
+  console.log(information[sections[Object.keys(sections)[0]]])
+    const [sectionTitle,setsectionTitle]=useState(information[sections[Object.keys(sections)[0]]].sectionTitle);
+    const [values,setValues]=useState({
+      name: activeInfo?.detail?.name || "",
+      title: activeInfo?.detail?.title || "",
+      linkedin: activeInfo?.detail?.linkedin || "",
+      github: activeInfo?.detail?.github || "",
+      phone: activeInfo?.detail?.phone || "",
+      email: activeInfo?.detail?.email || "",
+    });
+
 
   const workExpBody = (
     <div className="detail">
@@ -12,6 +26,7 @@ const Editor = ({ sections,information }) => {
         <Input
           label="Title"
           placeholder="Enter title eg. Frontend developer"
+          defaultValue={values.title}
         />
         <Input
           label="Company Name"
@@ -225,6 +240,11 @@ const Editor = ({ sections,information }) => {
     }
   }
 
+  useEffect(() => {
+    setActiveInfo(information[sections[activeSectionKey]]);
+    setsectionTitle(information[sections[activeSectionKey]].sectionTitle)
+  }, [activeSectionKey])
+
   return (
     <div className='editor-container'>
       <div className="title-editor">
@@ -238,16 +258,32 @@ const Editor = ({ sections,information }) => {
         </div>)}
       </div>
       <div className="body">
-        <Input label="Title" placeholder="Enter section title" />
+        <Input 
+        label="Title" 
+        value={sectionTitle}
+        onChange={e=>setsectionTitle(e.target.value)} />
         <div className="chips">
-          <div className="chip">
-            <p>Project x </p>
-          </div>
-          <div className="chip">
-            <p>Project x </p>
-          </div>
+          {
+            activeInfo?.details ?
+              activeInfo?.details?.map((item, index) => (
+                <div className="chip" key={item.title + index}>
+                  <p>{sections[activeSectionKey]} {index + 1}</p>
+                </div>
+              )
+              )
+              : ""
+          }
+          {activeInfo?.details &&
+          activeInfo?.details?.length > 0 ? (
+            <div className="new">
+              +New
+            </div>
+          ) : (
+            ""
+          )}
         </div>
         {generateBody()}
+        <button>Save</button>
       </div>
     </div>
   )
