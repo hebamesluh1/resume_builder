@@ -9,16 +9,22 @@ const Editor = ({ sections, information }) => {
     information[sections[Object.keys(sections)[0]]]
   );
   console.log(information[sections[Object.keys(sections)[0]]])
-    const [sectionTitle,setsectionTitle]=useState(information[sections[Object.keys(sections)[0]]].sectionTitle);
-    const [values,setValues]=useState({
-      name: activeInfo?.detail?.name || "",
-      title: activeInfo?.detail?.title || "",
-      linkedin: activeInfo?.detail?.linkedin || "",
-      github: activeInfo?.detail?.github || "",
-      phone: activeInfo?.detail?.phone || "",
-      email: activeInfo?.detail?.email || "",
-    });
+  const [sectionTitle, setsectionTitle] = useState(information[sections[Object.keys(sections)[0]]].sectionTitle);
+  const [values, setValues] = useState({
+    name: activeInfo?.detail?.name || "",
+    title: activeInfo?.detail?.title || "",
+    linkedin: activeInfo?.detail?.linkedin || "",
+    github: activeInfo?.detail?.github || "",
+    phone: activeInfo?.detail?.phone || "",
+    email: activeInfo?.detail?.email || "",
+  });
 
+  const handlePointUpdate = (value, index) => {
+    const tempValues = { ...values };
+    if (!Array.isArray(tempValues.points)) tempValues.points = [];
+    tempValues.points[index] = value;
+    setValues(tempValues);
+  };
 
   const workExpBody = (
     <div className="detail">
@@ -26,21 +32,39 @@ const Editor = ({ sections, information }) => {
         <Input
           label="Title"
           placeholder="Enter title eg. Frontend developer"
-          defaultValue={values.title}
+          value={values.title}
+          onChange={(event) =>
+            setValues((prev) => ({ ...prev, title: event.target.value }))
+          }
         />
         <Input
           label="Company Name"
           placeholder="Enter company name eg. amazon"
+          value={values.companyName}
+          onChange={(event) =>
+            setValues((prev) => ({ ...prev, companyName: event.target.value }))
+          }
+
         />
       </div>
       <div className="row">
         <Input
           label="Certificate Link"
           placeholder="Enter certificate link"
+          value={values.certificationLink}
+          onChange={(event) =>
+            setValues((prev) => ({
+              ...prev,
+              certificationLink: event.target.value,
+            }))}
         />
         <Input
           label="Location"
           placeholder="Enter location eg. Remote"
+          value={values.location}
+          onChange={(event) =>
+            setValues((prev) => ({ ...prev, location: event.target.value }))
+          }
         />
       </div>
       <div className="row">
@@ -48,24 +72,38 @@ const Editor = ({ sections, information }) => {
           label="Start Date"
           type="date"
           placeholder="Enter start date of work"
+          value={values.startDate}
+          onChange={(event) =>
+            setValues((prev) => ({ ...prev, startDate: event.target.value }))
+          }
         />
         <Input
           label="End Date"
           type="date"
           placeholder="Enter end date of work"
+          value={values.endDate}
+          onChange={(event) =>
+            setValues((prev) => ({ ...prev, endDate: event.target.value }))
+          }
         />
       </div>
 
       <div className="column">
         <label>Enter work description</label>
         <Input
+          value={values.points ? values.points[0] : ''}
           placeholder="Line 1"
+          onChange={(event) => handlePointUpdate(event.target.value, 0)}
         />
         <Input
+          value={values.points ? values.points[1] : ''}
           placeholder="Line 2"
+          onChange={(event) => handlePointUpdate(event.target.value, 1)}
         />
         <Input
+          value={values.points ? values.points[2] : ''}
           placeholder="Line 3"
+          onChange={(event) => handlePointUpdate(event.target.value, 2)}
         />
       </div>
     </div>
@@ -75,34 +113,56 @@ const Editor = ({ sections, information }) => {
       <div className="row">
         <Input
           label="Title"
+          value={values.title}
           placeholder="Enter title eg. Chat app"
+          onChange={(event) =>
+            setValues((prev) => ({ ...prev, title: event.target.value }))
+          }
         />
         <Input
           label="Overview"
+          value={values.overview}
           placeholder="Enter basic overview of project"
+          onChange={(event) =>
+            setValues((prev) => ({ ...prev, overview: event.target.value }))
+          }
         />
       </div>
       <div className="row">
         <Input
           label="Deployed Link"
+          value={values.link}
           placeholder="Enter deployed link of project"
+          onChange={(event) =>
+            setValues((prev) => ({ ...prev, link: event.target.value }))
+          }
         />
         <Input
           label="Github Link"
+          value={values.github}
           placeholder="Enter github link of project"
+          onChange={(event) =>
+            setValues((prev) => ({ ...prev, github: event.target.value }))
+          }
         />
       </div>
 
       <div className="column">
-        <label>Enter project description</label>
+        <label>Enter Project description</label>
         <Input
+          value={values.points ? values.points[0] : ''}
           placeholder="Line 1"
+          onChange={(event) => handlePointUpdate(event.target.value, 0)}
         />
         <Input
+          value={values.points ? values.points[1] : ''}
           placeholder="Line 2"
+          onChange={(event) => handlePointUpdate(event.target.value, 1)}
         />
         <Input
+          value={values.points ? values.points[2] : ''}
           placeholder="Line 3"
+          onChange={(event) => handlePointUpdate(event.target.value, 2)}
         />
       </div>
     </div>
@@ -112,11 +172,19 @@ const Editor = ({ sections, information }) => {
       <div className="row">
         <Input
           label="Title"
+          value={values.title}
           placeholder="Enter title eg. B-tech"
+          onChange={(event) =>
+            setValues((prev) => ({ ...prev, title: event.target.value }))
+          }
         />
         <Input
           label="College/School Name"
+          value={values.college}
           placeholder="Enter name of your college/school"
+          onChange={(event) =>
+            setValues((prev) => ({ ...prev, college: event.target.value }))
+          }
         />
       </div>
       <div className="row">
@@ -124,27 +192,38 @@ const Editor = ({ sections, information }) => {
           label="Start Date"
           type="date"
           placeholder="Enter start date of this education"
+          value={values.startDate}
+          onChange={(event) =>
+            setValues((prev) => ({ ...prev, startDate: event.target.value }))
+          }
         />
         <Input
           label="End Date"
           type="date"
           placeholder="Enter end date of this education"
+          value={values.endDate}
+          onChange={(event) =>
+            setValues((prev) => ({ ...prev, endDate: event.target.value }))
+          }
         />
       </div>
 
       <div className="column">
-        <label>Enter project description</label>
+        <label>Enter education description</label>
         <Input
+          value={values.points ? values.points[0] : ''}
           placeholder="Line 1"
+          onChange={(event) => handlePointUpdate(event.target.value, 0)}
         />
         <Input
+          value={values.points ? values.points[1] : ''}
           placeholder="Line 2"
+          onChange={(event) => handlePointUpdate(event.target.value, 1)}
         />
         <Input
+          value={values.points ? values.points[2] : ''}
           placeholder="Line 3"
-        />
-        <Input
-          placeholder="Line 4"
+          onChange={(event) => handlePointUpdate(event.target.value, 2)}
         />
       </div>
     </div>
@@ -154,31 +233,54 @@ const Editor = ({ sections, information }) => {
       <div className="row">
         <Input
           label="Name"
-          placeholder="Enter your Full name eg. Heba Mesluh"
+          placeholder="Enter your full name eg. Aashu"
+          value={values.name}
+          onChange={(event) =>
+            setValues((prev) => ({ ...prev, name: event.target.value }))
+          }
         />
         <Input
           label="Title"
-          placeholder="Enter your title eg.Frontend developer"
+          value={values.title}
+          placeholder="Enter your title eg. Frontend developer"
+          onChange={(event) =>
+            setValues((prev) => ({ ...prev, title: event.target.value }))
+          }
         />
       </div>
       <div className="row">
         <Input
           label="Linkedin Link"
+          value={values.linkedin}
           placeholder="Enter your linkedin profile link"
-        />
+          onChange={(event) =>
+            setValues((prev) => ({ ...prev, linkedin: event.target.value }))
+          } />
         <Input
           label="Github Link"
-          placeholder="Enter your Github profile link"
+          value={values.github}
+          placeholder="Enter your github profile link"
+          onChange={(event) =>
+            setValues((prev) => ({ ...prev, github: event.target.value }))
+          }
         />
       </div>
       <div className="row">
         <Input
           label="Email"
+          value={values.email}
           placeholder="Enter your email"
+          onChange={(event) =>
+            setValues((prev) => ({ ...prev, email: event.target.value }))
+          }
         />
         <Input
           label="Enter phone"
+          value={values.phone}
           placeholder="Enter your phone number"
+          onChange={(event) =>
+            setValues((prev) => ({ ...prev, phone: event.target.value }))
+          }
         />
       </div>
     </div>
@@ -186,18 +288,26 @@ const Editor = ({ sections, information }) => {
   const achievementsBody = (
     <div className="detail">
       <div className="column">
-        <label>Enter your achievments</label>
+        <label>Enter Achievement description</label>
         <Input
+          value={values.points ? values.points[0] : ''}
           placeholder="Line 1"
+          onChange={(event) => handlePointUpdate(event.target.value, 0)}
         />
         <Input
+          value={values.points ? values.points[1] : ''}
           placeholder="Line 2"
+          onChange={(event) => handlePointUpdate(event.target.value, 1)}
         />
         <Input
+          value={values.points ? values.points[2] : ''}
           placeholder="Line 3"
+          onChange={(event) => handlePointUpdate(event.target.value, 2)}
         />
         <Input
+          value={values.points ? values.points[3] : ''}
           placeholder="Line 4"
+          onChange={(event) => handlePointUpdate(event.target.value, 3)}
         />
       </div>
     </div>
@@ -207,6 +317,10 @@ const Editor = ({ sections, information }) => {
       <Input
         label="Summary"
         placeholder="Enter your objective/summary"
+        value={values.summary}
+        onChange={(event) =>
+          setValues((prev) => ({ ...prev, summary: event.target.value }))
+        }
       />
     </div>
   );
@@ -215,6 +329,10 @@ const Editor = ({ sections, information }) => {
       <Input
         label="Other"
         placeholder="Enter sth"
+        value={values.other}
+        onChange={(event) =>
+          setValues((prev) => ({ ...prev, other: event.target.value }))
+        }
       />
     </div>
   );
@@ -258,10 +376,10 @@ const Editor = ({ sections, information }) => {
         </div>)}
       </div>
       <div className="body">
-        <Input 
-        label="Title" 
-        value={sectionTitle}
-        onChange={e=>setsectionTitle(e.target.value)} />
+        <Input
+          label="Title"
+          value={sectionTitle}
+          onChange={e => setsectionTitle(e.target.value)} />
         <div className="chips">
           {
             activeInfo?.details ?
@@ -274,7 +392,7 @@ const Editor = ({ sections, information }) => {
               : ""
           }
           {activeInfo?.details &&
-          activeInfo?.details?.length > 0 ? (
+            activeInfo?.details?.length > 0 ? (
             <div className="new">
               +New
             </div>
