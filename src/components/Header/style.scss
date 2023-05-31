@@ -1,0 +1,26 @@
+.header{
+    padding: 50px 30px;
+    text-align: center;
+    display: flex;
+    gap: 30px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #eee;
+    min-height: 80vh;
+    .title{
+        color: rgb(11, 11, 11);
+        font-size: 3.5rem;
+        font-weight: bold;
+        margin: 0 auto;
+        letter-spacing: 1px;
+        line-height: 4.1rem;
+        span{
+            color:#00BFA6;
+        }
+    }
+    .right{
+        img{
+            width: 400px;
+        }
+    }
+}
