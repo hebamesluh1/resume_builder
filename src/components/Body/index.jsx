@@ -1,9 +1,10 @@
 import Editor from '../Editor';
+import {useState} from 'react';
 import './style.scss';
 import { FiDownloadCloud } from "react-icons/fi";
-import { colors, sections } from '../../mock/data'
+import { colors, sections ,information} from '../../mock/data'
 const Body = () => {
-
+    const [resumeInformation, setResumeInformation] = useState(information);
     return (
         <div className='container'>
             <div className="title">
@@ -21,7 +22,7 @@ const Body = () => {
                 <button><FiDownloadCloud />Download</button>
             </div>
             <div className="main">
-                <Editor sections={sections} />
+                <Editor sections={sections} information={resumeInformation}/>
             </div>
         </div>
     )
