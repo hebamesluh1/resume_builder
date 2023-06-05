@@ -18,17 +18,17 @@ export const information = {
   [sections.workExp]: {
     id: sections.workExp,
     sectionTitle: sections.workExp,
-    details: [],
+    detail: [],
   },
   [sections.project]: {
     id: sections.project,
     sectionTitle: sections.project,
-    details: [],
+    detail: [],
   },
   [sections.education]: {
     id: sections.education,
     sectionTitle: sections.education,
-    details: [],
+    detail: [],
   },
   [sections.achievement]: {
     id: sections.achievement,

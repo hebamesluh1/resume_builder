@@ -358,9 +358,35 @@ const Editor = ({ sections, information }) => {
     }
   }
 
+  const handleSubmission = () => {
+    console.log(values)
+  }
   useEffect(() => {
-    setActiveInfo(information[sections[activeSectionKey]]);
-    setsectionTitle(information[sections[activeSectionKey]].sectionTitle)
+    const actionInfo = information[sections[activeSectionKey]];
+    setActiveInfo(actionInfo);
+    setsectionTitle(information[sections[activeSectionKey]].sectionTitle);
+    setValues({
+      name: activeInfo?.detail?.name || "",
+      overview: activeInfo?.detail ? activeInfo.detail[0]?.overview || "" : "",
+      link: activeInfo?.detail ? activeInfo.detail[0]?.link || "" : "",
+      certificationLink: activeInfo?.detail ? activeInfo.detail[0]?.certificationLink || "" : "",
+      startDate: activeInfo?.detail ? activeInfo.detail[0]?.startDate || "" : "",
+      endDate: activeInfo?.detail ? activeInfo.detail[0]?.endDate || "" : "",
+      points: activeInfo?.detail 
+      ?activeInfo.detail[0]?.points || "" 
+      ?[...activeInfo.detail[0]?.points]
+      :""
+      :activeInfo?.points
+      ?[...actionInfo.points]
+      :"",
+
+
+      title: activeInfo?.detail?.title || "",
+      linkedin: activeInfo?.detail?.linkedin || "",
+      github: activeInfo?.detail?.github || "",
+      phone: activeInfo?.detail?.phone || "",
+      email: activeInfo?.detail?.email || "",
+    });
   }, [activeSectionKey])
 
   return (
@@ -382,8 +408,8 @@ const Editor = ({ sections, information }) => {
           onChange={e => setsectionTitle(e.target.value)} />
         <div className="chips">
           {
-            activeInfo?.details ?
-              activeInfo?.details?.map((item, index) => (
+            activeInfo?.detail ?
+              activeInfo?.detail?.map((item, index) => (
                 <div className="chip" key={item.title + index}>
                   <p>{sections[activeSectionKey]} {index + 1}</p>
                 </div>
@@ -391,8 +417,8 @@ const Editor = ({ sections, information }) => {
               )
               : ""
           }
-          {activeInfo?.details &&
-            activeInfo?.details?.length > 0 ? (
+          {activeInfo?.detail &&
+            activeInfo?.detail?.length > 0 ? (
             <div className="new">
               +New
             </div>
@@ -401,7 +427,7 @@ const Editor = ({ sections, information }) => {
           )}
         </div>
         {generateBody()}
-        <button>Save</button>
+        <button onClick={handleSubmission}>Save</button>
       </div>
     </div>
   )
