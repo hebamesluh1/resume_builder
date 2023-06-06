@@ -1,4 +1,4 @@
-.editor-container {
+.container-editor {
   min-width: 550px;
   min-height: 450px;
   max-width: 750px;
@@ -9,7 +9,7 @@
   padding-top: 5px;
   height: fit-content;
   margin: 0 auto;
-  .title-editor {
+  .header-editor {
     display: flex;
     gap: 10px;
     overflow-x: auto;

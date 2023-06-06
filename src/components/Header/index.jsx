@@ -2,7 +2,7 @@ import './style.scss';
 import img from '../../assets/resume.svg'
 const Header = () => {
   return (
-    <div className='header'>
+    <div className='header-hero'>
         <div className="left">
         <p className='title'>A <span>Resume</span> that stands out !</p>
         <p className='title'>Make your own resume <span> Its free</span></p>

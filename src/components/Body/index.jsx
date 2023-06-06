@@ -1,10 +1,13 @@
 import Editor from '../Editor';
-import {useState} from 'react';
+import { useState,useRef } from 'react';
+import Resume from '../Resume';
 import './style.scss';
 import { FiDownloadCloud } from "react-icons/fi";
-import { colors, sections ,information} from '../../mock/data'
+import { colors, sections, information } from '../../mock/data'
 const Body = () => {
     const [resumeInformation, setResumeInformation] = useState(information);
+    const resumeRef = useRef();
+    const [activeColor, setActiveColor] = useState(colors[0]);
     return (
         <div className='container'>
             <div className="title">
@@ -22,7 +25,13 @@ const Body = () => {
                 <button><FiDownloadCloud />Download</button>
             </div>
             <div className="main">
-                <Editor sections={sections} information={resumeInformation}/>
+                <Editor sections={sections} information={resumeInformation} />
+                <Resume
+                    ref={resumeRef}
+                    sections={sections}
+                    information={resumeInformation}
+                    activeColor={activeColor}
+                />
             </div>
         </div>
     )

@@ -1,4 +1,4 @@
-.header{
+.header-hero{
     padding: 50px 30px;
     text-align: center;
     display: flex;
@@ -6,7 +6,8 @@
     justify-content: space-between;
     align-items: center;
     background-color: #eee;
-    min-height: 80vh;
+    min-height: 100vh;
+    margin-bottom: 50px;
     .title{
         color: rgb(11, 11, 11);
         font-size: 3.5rem;
